@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 
 const WORK_TYPE_MAP: Record<string, string> = {
   'Курсовая работа': 'coursework',
@@ -66,22 +66,19 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-8 md:py-16">
-      <h1 
-        className="text-2xl font-semibold text-gray-900"
-        style={{
-          display: 'flex',
-          position: 'absolute',
-          left: '397px',
-          top: '43px',
-          justifyContent: 'center',
-          boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.15)',
-        }}
-      >
-        Кэмп Ракета
-      </h1>
       <div className="mx-auto max-w-md">
         {/* Logo */}
         <div className="mb-8 text-center">
+          <h1 
+            className="text-2xl font-semibold text-gray-900 inline-block"
+            style={{
+              boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.15)',
+              padding: '8px 16px',
+              borderRadius: '8px',
+            }}
+          >
+            Кэмп Ракета
+          </h1>
         </div>
 
         {/* Card */}
@@ -128,9 +125,9 @@ export default function Home() {
 
             {/* Work Type */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
+              <div className="mb-2 block text-sm font-medium text-gray-700">
                 Тип работы
-              </label>
+              </div>
               <div className="space-y-2">
                 {Object.keys(WORK_TYPE_MAP).map((type) => (
                   <label
