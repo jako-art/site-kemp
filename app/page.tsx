@@ -1,6 +1,9 @@
 'use client'
 
 import { useState, type FormEvent } from 'react'
+import { BrandButton } from '@/components/BrandButton'
+import { BrandCard } from '@/components/BrandCard'
+import { BrandInput } from '@/components/BrandInput'
 
 const WORK_TYPE_MAP: Record<string, string> = {
   'Курсовая работа': 'coursework',
@@ -65,74 +68,58 @@ export default function Home() {
   const isFormValid = topic.trim() && workType && volume
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-8 md:py-16">
+    <div className="min-h-screen bg-brand-light px-4 py-8 md:py-16 font-brand">
       <div className="mx-auto max-w-md">
         {/* Logo */}
-        <div className="mb-8 text-center">
-          <h1 
-            className="text-2xl font-semibold text-gray-900 inline-block"
-            style={{
-              boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.15)',
-              padding: '8px 16px',
-              borderRadius: '8px',
-            }}
-          >
-            Кэмп Ракета
-          </h1>
+        <div className="mb-12 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-brand-yellow rounded-brand-sm shadow-brand-float">
+            <span className="text-xl font-bold text-brand-black">Кэмп Ракета</span>
+          </div>
         </div>
 
         {/* Card */}
-        <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
-          <div className="mb-6 text-center">
-            <h2 className="mb-2 text-2xl font-bold text-gray-900 md:text-3xl">
+        <BrandCard>
+          <div className="mb-8 text-center">
+            <h1 className="mb-3 text-2xl font-bold text-brand-black md:text-3xl tracking-tight">
               Сгенерируй работу за пару минут
-            </h2>
-            <p className="text-sm text-gray-600 md:text-base">
+            </h1>
+            <p className="text-sm text-brand-grey md:text-base">
               Введи тему, выбери формат и объём — дальше продолжишь в Кэмпе.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-8">
             {/* Topic */}
-            <div>
-              <label
-                htmlFor="topic"
-                className="mb-2 block text-sm font-medium text-gray-700"
-              >
-                Тема/запрос
-              </label>
-              <textarea
-                id="topic"
-                value={topic}
-                onChange={(e) => {
-                  setTopic(e.target.value)
-                  if (errors.topic) {
-                    setErrors({ ...errors, topic: undefined })
-                  }
-                }}
-                placeholder="Например: 'Причины и последствия индустриализации в России'"
-                rows={4}
-                className={`w-full rounded-lg border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2 ${
-                  errors.topic
-                    ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                    : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
-                }`}
-              />
-              {errors.topic && (
-                <p className="mt-1 text-xs text-red-600">{errors.topic}</p>
-              )}
-            </div>
+            <BrandInput
+              id="topic"
+              label="Тема/запрос"
+              as="textarea"
+              value={topic}
+              onChange={(e) => {
+                setTopic(e.target.value)
+                if (errors.topic) {
+                  setErrors({ ...errors, topic: undefined })
+                }
+              }}
+              placeholder="Например: 'Причины и последствия индустриализации в России'"
+              rows={4}
+              error={errors.topic}
+            />
 
             {/* Work Type */}
             <div>
-              <div className="mb-2 block text-sm font-medium text-gray-700">
+              <div className="mb-3 block text-sm font-medium text-brand-grey">
                 Тип работы
               </div>
-              <div className="space-y-2">
+              <div className="grid grid-cols-1 gap-3">
                 {Object.keys(WORK_TYPE_MAP).map((type) => (
                   <label
                     key={type}
-                    className="flex cursor-pointer items-center rounded-lg border border-gray-300 px-4 py-3 transition-colors hover:bg-gray-50 has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50"
+                    className={`flex cursor-pointer items-center rounded-brand-sm border px-4 py-4 transition-all hover:bg-brand-light ${
+                      workType === type
+                        ? 'border-brand-accent bg-brand-accent/5 ring-1 ring-brand-accent'
+                        : 'border-brand-border bg-brand-white'
+                    }`}
                   >
                     <input
                       type="radio"
@@ -145,9 +132,13 @@ export default function Home() {
                           setErrors({ ...errors, workType: undefined })
                         }
                       }}
-                      className="h-4 w-4 text-blue-600 focus:ring-2 focus:ring-blue-500"
+                      className="h-4 w-4 text-brand-accent border-brand-border focus:ring-brand-accent"
                     />
-                    <span className="ml-3 text-sm text-gray-700">{type}</span>
+                    <span className={`ml-3 text-sm font-medium ${
+                      workType === type ? 'text-brand-accent' : 'text-brand-black'
+                    }`}>
+                      {type}
+                    </span>
                   </label>
                 ))}
               </div>
@@ -160,7 +151,7 @@ export default function Home() {
             <div>
               <label
                 htmlFor="volume"
-                className="mb-2 block text-sm font-medium text-gray-700"
+                className="mb-2 block text-sm font-medium text-brand-grey"
               >
                 Объём
               </label>
@@ -173,10 +164,10 @@ export default function Home() {
                     setErrors({ ...errors, volume: undefined })
                   }
                 }}
-                className={`w-full rounded-lg border px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-2 ${
+                className={`w-full rounded-brand-sm border px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 bg-brand-light focus:bg-brand-white ${
                   errors.volume
                     ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-                    : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+                    : 'border-brand-border focus:border-brand-accent focus:ring-brand-accent/20'
                 }`}
               >
                 <option value="">Выберите объём</option>
@@ -192,19 +183,20 @@ export default function Home() {
             </div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={!isFormValid}
-              className="w-full rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-300"
-            >
-              Продолжить
-            </button>
-
-            <p className="text-center text-xs text-gray-500">
-              Нажимая 'Продолжить', вы перейдёте на kampus.ai
-            </p>
+            <div className="pt-2">
+              <BrandButton
+                type="submit"
+                disabled={!isFormValid}
+                label="Продолжить"
+                className="w-full"
+                size="lg"
+              />
+              <p className="mt-4 text-center text-xs text-brand-grey">
+                Нажимая 'Продолжить', вы перейдёте на kampus.ai
+              </p>
+            </div>
           </form>
-        </div>
+        </BrandCard>
       </div>
     </div>
   )
