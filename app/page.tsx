@@ -143,7 +143,7 @@ export default function Home() {
                               setErrors({ ...errors, workType: undefined })
                             }
                           }}
-                          className="sr-only"
+                          className="sr-only focus:ring-2 focus:ring-brand-accent"
                         />
                         <span className={`text-xs md:text-sm font-semibold ${
                           workType === type ? 'text-brand-accent' : 'text-brand-black'
