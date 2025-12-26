@@ -1,10 +1,15 @@
-import React from 'react';
+import type React from 'react';
 
-interface BrandInputProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement>, React.InputHTMLAttributes<HTMLInputElement> {
+interface BaseProps {
   label: string;
   error?: string;
-  as?: 'input' | 'textarea';
 }
+
+type BrandInputProps = BaseProps & 
+  (
+    | ({ as?: 'input' } & React.InputHTMLAttributes<HTMLInputElement>)
+    | ({ as: 'textarea' } & React.TextareaHTMLAttributes<HTMLTextAreaElement>)
+  );
 
 export const BrandInput = ({ 
   label, 

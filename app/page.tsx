@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type ChangeEvent } from 'react'
 import Image from 'next/image'
 import { BrandButton } from '@/components/BrandButton'
 import { BrandCard } from '@/components/BrandCard'
@@ -33,7 +33,7 @@ export default function Home() {
     const newErrors: typeof errors = {}
 
     if (!topic.trim()) {
-      newErrors.topic = 'Поле обязательно для заполнении'
+      newErrors.topic = 'Поле обязательно для заполнения'
     }
 
     if (!workType) {
@@ -105,7 +105,7 @@ export default function Home() {
                   label="Тема/запрос"
                   as="textarea"
                   value={topic}
-                  onChange={(e) => {
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
                     setTopic(e.target.value)
                     if (errors.topic) {
                       setErrors({ ...errors, topic: undefined })
