@@ -69,7 +69,7 @@ export default function Home() {
   const isFormValid = topic.trim() && workType && volume
 
   return (
-    <div className="h-screen overflow-hidden bg-brand-light font-brand flex flex-col">
+    <div className="h-screen overflow-hidden bg-brand-light font-brand flex flex-col text-center">
       {/* Header with Logo */}
       <header className="p-4 md:p-6 lg:p-8 flex-shrink-0">
         <div className="w-full flex justify-start">
@@ -84,9 +84,9 @@ export default function Home() {
       </header>
 
       <main className="flex-1 px-4 pb-6 min-h-0 flex flex-col items-center justify-center">
-        <div className="w-full max-w-md md:max-w-2xl flex flex-col items-center md:items-start space-y-6 md:space-y-8">
+        <div className="w-full max-w-md md:max-w-2xl flex flex-col items-center space-y-6 md:space-y-8">
           {/* Header Text - Outside of the card */}
-          <div className="w-full text-center md:text-left">
+          <div className="w-full text-center">
             <h1 className="mb-2 md:mb-4 text-3xl font-bold text-brand-black md:text-5xl lg:text-6xl tracking-tighter leading-[1.1]">
               Сгенерируй работу за пару минут
             </h1>
@@ -126,11 +126,11 @@ export default function Home() {
                     {Object.keys(WORK_TYPE_MAP).map((type) => (
                       <label
                         key={type}
-                      className={`flex cursor-pointer items-center justify-center rounded-brand-md border p-2 md:p-3 transition-all hover:bg-brand-light text-center focus-within:ring-2 focus-within:ring-brand-accent focus-within:ring-offset-2 ${
-                        workType === type
-                          ? 'border-brand-accent bg-brand-accent/5 ring-1 ring-brand-accent'
-                          : 'border-brand-border bg-brand-white'
-                      }`}
+                        className={`flex cursor-pointer items-center justify-center rounded-brand-md border p-2 md:p-3 transition-all hover:bg-brand-light text-center focus-within:ring-2 focus-within:ring-brand-accent focus-within:ring-offset-2 ${
+                          workType === type
+                            ? 'border-brand-accent bg-brand-accent/5 ring-1 ring-brand-accent'
+                            : 'border-brand-border bg-brand-white'
+                        }`}
                       >
                         <input
                           type="radio"
@@ -160,7 +160,7 @@ export default function Home() {
                   <div className="w-full">
                     <label
                       htmlFor="volume"
-                      className="mb-2 block text-xs md:text-sm font-medium text-brand-grey"
+                      className="mb-2 block text-xs md:text-sm font-medium text-brand-grey text-left"
                     >
                       Объём
                     </label>
